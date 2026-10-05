@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!--
+  KLINKERHANDEL RHEDE · STARTSEITE (Relaunch-Entwurf)
+  ------------------------------------------------------------------
+  Aufbau dieser Datei
+    1. <head>   Meta-Daten, strukturierte Daten, Design-Tokens, CSS
+    2. <body>   Header · Hero · Intro · Produkte · Referenzen ·
+                Klinker des Monats · Beratung · Kundenstimmen ·
+                Kontakt · Karte · Footer
+    3. <script> Module (jeweils gekapselt, unabhängig lauffähig)
+
+  Hinweise zur Integration
+    · Bilder werden direkt aus der bestehenden Mediathek geladen
+      (https://klinkerhandel.de/wp-content/uploads/…).
+    · Alle Links zeigen auf die bestehenden URLs von klinkerhandel.de.
+    · Kontaktformular: ohne data-endpoint öffnet es das E-Mail-Programm
+      (mailto). Mit data-endpoint="…" sendet es per POST (JSON).
+      -> Frontend-Prototyp – Backend-Anbindung erforderlich.
+    · Kundenstimmen: Kennzahlen sind statisch (Stand siehe Abschnitt).
+      Die einzelnen Bewertungstexte kommen im Livebetrieb aus dem
+      bestehenden Bewertungs-Widget (Slot ist im Markup markiert).
+    · Montserrat wird wie auf der bestehenden Seite über Google Fonts
+      geladen. Empfehlung für den Livegang: lokal einbinden (DSGVO).
+    · Solange diese Datei als Vorschau neben der Live-Seite liegt,
+      verhindert der Canonical-Link doppelte Indexierung.
+-->
+
+<title>Klinkerhandel Rhede – Klinker, Verblender &amp; Riemchen</title>
+<meta name="description" content="Klinkerhandel Harbecke in Rhede: Verblender, Riemchen und Dämmklinker in großer Auswahl. Ausstellung mit gemauerten Flächen und persönliche Beratung.">
+<link rel="canonical" href="https://klinkerhandel.de/">
+<meta name="theme-color" content="#F44336">
+
+<meta property="og:locale" content="de_DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Klinkerhandel Rhede">
+<meta property="og:title" content="Klinkerhandel Rhede – Die Welt der Klinker">
+<meta property="og:description" content="Verblender, Riemchen und Dämmklinker in großer Auswahl. Ausstellung mit gemauerten Flächen und persönliche Beratung in Rhede.">
+<meta property="og:url" content="https://klinkerhandel.de/">
+<meta property="og:image" content="https://klinkerhandel.de/wp-content/uploads/2025/12/Slider-4.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="https://klinkerhandel.de/wp-content/uploads/2022/03/Unbenannt-2_Zeichenfläche-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="preload" as="image" href="https://klinkerhandel.de/wp-content/uploads/2025/12/Slider-1.jpg" fetchpriority="high">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://klinkerhandel.de/#website",
+      "url": "https://klinkerhandel.de/",
+      "name": "Klinkerhandel Rhede",
+      "inLanguage": "de-DE",
+      "publisher": { "@id": "https://klinkerhandel.de/#business" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": "https://klinkerhandel.de/?s={search_term_string}" },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://klinkerhandel.de/#business",
+      "name": "Klinkerhandel Harbecke Rhede",
+      "url": "https://klinkerhandel.de/",
+      "logo": "https://klinkerhandel.de/wp-content/uploads/2022/02/Klinkerhandel-Rhede-Logo-13222.png",
+      "image": [
+        "https://klinkerhandel.de/wp-content/uploads/2021/12/Klinkerhandel-Rhede-Showroom-2.jpg",
+        "https://klinkerhandel.de/wp-content/uploads/2025/12/Slider-4.jpg"
+      ],
+      "telephone": "+49 2872 3033",
+      "email": "info@klinkerhandel.de",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Krechtinger Str. 29",
+        "postalCode": "46414",
+        "addressLocality": "Rhede",
+        "addressCountry": "DE"
+      },
+      "hasMap": "https://maps.google.com/?cid=4538305440914039918",
+      "sameAs": ["https://www.instagram.com/klinkerhandel.harbecke.rhede/"],
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:30", "closes": "12:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "14:00", "closes": "17:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:30", "closes": "12:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "14:00", "closes": "17:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:00" }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* ==================================================================
+   1. DESIGN-TOKENS (Corporate Design klinkerhandel.de)
+   ================================================================== */
+:root {
+  /* Farben */
+  --rot: #F44336;            /* CD-Rot: Überschriften, Akzente (große Schrift) */
+  --rot-kraft: #DC3227;      /* gleiche Familie, AA-Kontrast für Buttons und kleine Schrift */
+  --gruen: #00843C;          /* Logo-Grün: Statusanzeigen */
+  --anthrazit: #333333;      /* CD-Dunkel: Buttons, dunkle Flächen */
+  --text: #1B1B1B;
+  --text-leise: #5D5D5D;
+  --grau: #E2E2E2;           /* CD-Grau */
+  --hell: #F4F4F3;
+  --weiss: #FFFFFF;
+  --linie: rgba(0, 0, 0, .14);
+  --linie-hell: rgba(255, 255, 255, .22);
+
+  /* Typografie */
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Abstände */
+  --space-xs: .5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: clamp(4.5rem, 10vw, 9rem);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* Form */
+  --radius: 4px;             /* wie die bestehenden Buttons */
+  --container: 1320px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* Läuferverband als feine Flächenstruktur */
+  --verband: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Cpath d='M0 .5H120M0 30.5H120M.5 0V30M60.5 30V60' stroke='%23fff' stroke-opacity='.07' fill='none'/%3E%3C/svg%3E");
+  --verband-dunkel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Cpath d='M0 .5H120M0 30.5H120M.5 0V30M60.5 30V60' stroke='%23000' stroke-opacity='.07' fill='none'/%3E%3C/svg%3E");
+
+  color-scheme: light;
+}
+
+/* ==================================================================
+   2. BASIS
+   ================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 2rem);
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--weiss);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--rot-kraft); outline-offset: 3px; }
+.auf-dunkel :focus-visible, .hero :focus-visible { outline-color: #fff; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed; left: 1rem; top: -4rem; z-index: 100;
+  padding: .75rem 1rem; background: var(--anthrazit); color: #fff; font-weight: 600;
+  border-radius: var(--radius); transition: top .2s;
+}
+.skip-link:focus { top: 1rem; }
+
+.container { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
+.section { padding-block: var(--space-xl); }
+
+.icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* Abschnittstitel: rot und in Versalien, wie im bestehenden Auftritt */
+.title {
+  font-size: clamp(1.75rem, 4.2vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: var(--rot);
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.lead { max-width: 36rem; }
+
+/* Buttons */
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: .75rem;
+  min-height: 3.25rem; padding: .9rem 1.6rem;
+  border: 0; border-radius: var(--radius);
+  background: var(--rot-kraft); color: #fff;
+  font-size: .875rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; line-height: 1.2;
+  transition: color .35s var(--ease);
+}
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--anthrazit);
+  transform: translateY(101%); transition: transform .45s var(--ease);
+}
+.btn:hover::before, .btn:focus-visible::before { transform: none; }
+.btn .icon { transition: transform .45s var(--ease); }
+.btn:hover .icon { transform: translateX(4px); }
+.btn--dunkel { background: var(--anthrazit); }
+.btn--dunkel::before { background: var(--rot-kraft); }
+.btn--hell { background: #fff; color: var(--text); }
+.btn--hell::before { background: var(--rot-kraft); }
+.btn--hell:hover, .btn--hell:focus-visible { color: #fff; }
+.btn--linie { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .75); }
+.btn--linie::before { background: #fff; }
+.btn--linie:hover, .btn--linie:focus-visible { color: var(--text); }
+
+.textlink {
+  font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .3em;
+  text-decoration-color: var(--rot); transition: color .25s;
+}
+.textlink:hover { color: var(--rot-kraft); }
+
+/* Einblendungen beim Scrollen (nur mit JavaScript aktiv) */
+.js [data-reveal] {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .8s var(--ease), transform .9s var(--ease);
+  transition-delay: var(--delay, 0s);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+.js [data-unveil] > * { clip-path: inset(0 0 100% 0); transition: clip-path 1.2s var(--ease); }
+.js [data-unveil].is-in > * { clip-path: inset(0); }
+
+/* ==================================================================
+   3. KOMPONENTE: BRICKSTAGE
+      Bildbühne, auf der das nächste Bild Stein für Stein im
+      Läuferverband "aufgemauert" wird (Hero + Klinker des Monats).
+   ================================================================== */
+.brickstage { position: relative; overflow: hidden; background: #cfcfcc; }
+.brickstage__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.brickstage__wall { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.brick { position: absolute; display: block; background-repeat: no-repeat; will-change: transform, opacity; }
+
+/* ==================================================================
+   4. HEADER + NAVIGATION
+   ================================================================== */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  padding: 14px var(--gutter) 0;
+  pointer-events: none;
+  transition: padding .45s var(--ease), transform .8s var(--ease);
+}
+.js .site-header { transform: translateY(-130%); }
+.js.is-ready .site-header { transform: none; }
+.site-header.is-stuck { padding-top: 8px; }
+.site-header__bar {
+  position: relative; pointer-events: auto;
+  max-width: calc(var(--container) + 3rem); margin-inline: auto;
+  height: var(--header-h);
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0 .75rem 0 1.5rem;
+  background: #fff;
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .5);
+  transition: height .45s var(--ease);
+}
+.site-header.is-stuck .site-header__bar { height: 62px; }
+.site-header__progress {
+  position: absolute; left: 0; bottom: 0; width: 100%; height: 3px;
+  background: var(--rot); transform-origin: 0 50%; transform: scaleX(var(--scroll, 0));
+}
+.logo { flex: none; display: block; }
+.logo img { height: 46px; width: auto; transition: height .45s var(--ease); }
+.site-header.is-stuck .logo img { height: 38px; }
+
+.nav { flex: 1; }
+.nav__link { text-decoration: none; }
+.nav__toggle { border: 0; background: none; padding: 0; display: grid; place-items: center; color: inherit; }
+.nav__toggle .icon { width: 1rem; height: 1rem; transition: transform .35s var(--ease); }
+.nav__item.is-open > .nav__toggle .icon { transform: rotate(180deg); }
+.nav__sub a { display: block; text-decoration: none; }
+.nav__extra { display: none; }
+
+.tools { display: flex; align-items: center; gap: .125rem; margin-left: auto; }
+.tools__btn {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 0; background: none; border-radius: var(--radius); color: var(--text); text-decoration: none;
+  transition: background .25s, color .25s;
+}
+.tools__btn:hover { background: var(--hell); color: var(--rot-kraft); }
+.burger { display: none; }
+.burger span { display: block; width: 22px; height: 2px; background: currentColor; transition: transform .4s var(--ease); }
+.burger span + span { margin-top: 6px; }
+.nav-open .burger span:first-child { transform: translateY(4px) rotate(45deg); }
+.nav-open .burger span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+.search {
+  position: absolute; right: 0; top: calc(100% + 8px);
+  width: min(30rem, 100%); padding: 1rem;
+  display: flex; gap: .5rem;
+  background: #fff; box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .5); border-top: 3px solid var(--rot);
+}
+.search[hidden] { display: none; }
+.search input {
+  flex: 1; min-width: 0; height: 3rem; padding: 0 1rem;
+  border: 1.5px solid var(--linie); border-radius: var(--radius); background: #fff;
+}
+.search input:focus { border-color: var(--anthrazit); outline: none; }
+.search .btn { min-height: 3rem; padding-inline: 1.1rem; }
+
+/* Desktop-Navigation */
+@media (min-width: 1180px) {
+  .nav, .nav__list { height: 100%; }
+  .nav__list { display: flex; justify-content: center; align-items: stretch; gap: .35rem; }
+  .nav__item { position: relative; display: flex; align-items: center; }
+  .nav__link { position: relative; display: block; padding: .6rem .55rem; font-size: .9375rem; font-weight: 500; white-space: nowrap; }
+  .nav__link::after {
+    content: ""; position: absolute; left: .55rem; right: .55rem; bottom: .25rem; height: 2px;
+    background: var(--rot); transform: scaleX(0); transform-origin: 0 50%; transition: transform .35s var(--ease);
+  }
+  .nav__item:hover > .nav__link::after, .nav__link:focus-visible::after { transform: scaleX(1); }
+  .nav__toggle { width: 20px; height: 28px; margin-left: -.35rem; }
+  .nav__sub {
+    position: absolute; top: 100%; left: -.75rem; min-width: 15.5rem; padding: .6rem;
+    background: #fff; border-top: 3px solid var(--rot); box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .5);
+    opacity: 0; visibility: hidden; transform: translateY(10px);
+    transition: opacity .25s, transform .4s var(--ease), visibility 0s .4s;
+  }
+  .nav__item:hover > .nav__sub,
+  .nav__item:focus-within > .nav__sub,
+  .nav__item.is-open > .nav__sub { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .nav__sub a { padding: .55rem .8rem; font-size: .9rem; border-radius: 2px; transition: background .2s, color .2s, padding .3s var(--ease); }
+  .nav__sub a:hover, .nav__sub a:focus-visible { background: var(--hell); color: var(--rot-kraft); padding-left: 1.1rem; }
+}
+
+/* Mobile Navigation: Vollflächig, klappt wie ein Vorhang von oben auf */
+@media (max-width: 1179.98px) {
+  .burger { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .tools__btn--desktop { display: none; }
+  .nav {
+    position: fixed; inset: 0; z-index: -1; flex: none;
+    padding: calc(var(--header-h) + 3rem) var(--gutter) calc(3rem + env(safe-area-inset-bottom, 0px));
+    background: #fff; overflow-y: auto; overscroll-behavior: contain;
+    clip-path: inset(0 0 100% 0); visibility: hidden;
+    transition: clip-path .6s var(--ease), visibility 0s .6s;
+  }
+  .nav-open .nav { clip-path: inset(0); visibility: visible; transition-delay: 0s; }
+  .nav-open, .nav-open body { overflow: hidden; }
+  .nav__item { display: grid; grid-template-columns: 1fr auto; align-items: center; border-bottom: 1px solid var(--linie); }
+  .nav__link { padding: 1rem 0; font-size: 1.375rem; font-weight: 700; text-transform: uppercase; line-height: 1.2; }
+  .nav__toggle { width: 48px; height: 48px; }
+  .nav__toggle .icon { width: 1.4rem; height: 1.4rem; }
+  .nav__sub { grid-column: 1 / -1; display: none; padding: 0 0 1rem; }
+  .nav__item.is-open > .nav__sub { display: block; }
+  .nav__sub a { padding: .45rem 0; }
+  .nav__extra { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; margin-top: 2rem; }
+  .nav__extra a { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; text-decoration: none; }
+}
+@media (max-width: 600px) {
+  :root { --header-h: 64px; }
+  .site-header { padding-top: 10px; }
+  .site-header__bar { padding-left: 1rem; padding-right: .35rem; }
+  .logo img { height: 38px; }
+}
+
+/* ==================================================================
+   5. HERO
+   ================================================================== */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  height: 100vh; height: 100svh; min-height: 600px; max-height: 1100px;
+  background: #4A4A48; color: #fff;
+}
+.hero__stage {
+  position: absolute; inset: 0; background: #4A4A48;
+  transform: scale(calc(1 + var(--hp, 0) * .08)); transform-origin: 50% 65%;
+}
+.hero__shade {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .38) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .74) 100%);
+}
+.hero__inner {
+  position: absolute; inset: auto 0 0 0; z-index: 2;
+  width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto;
+  padding-bottom: calc(clamp(1.5rem, 4vw, 3.25rem) + env(safe-area-inset-bottom, 0px));
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: clamp(1.25rem, 2.5vw, 2rem) 2rem;
+  transform: translateY(calc(var(--hp, 0) * -70px)); opacity: calc(1 - var(--hp, 0) * 1.25);
+}
+.hero__title {
+  grid-column: 1 / -1;
+  font-size: clamp(2.5rem, 10.6vw, 9.5rem);
+  font-weight: 800; line-height: .9; letter-spacing: -.025em; text-transform: uppercase;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, .3);
+}
+.mask { display: block; overflow: hidden; padding-bottom: .07em; }
+.mask > span { display: block; }
+.js .mask > span { transform: translateY(108%); transition: transform 1.15s var(--ease) .25s; }
+.js .mask + .mask > span { transition-delay: .38s; }
+.js.is-ready .mask > span { transform: none; }
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.js .hero__actions, .js .hero__controls { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease) .75s, transform .9s var(--ease) .75s; }
+.js.is-ready .hero__actions, .js.is-ready .hero__controls { opacity: 1; transform: none; }
+
+.hero__controls { display: grid; justify-items: end; gap: 1rem; }
+.hero__count { font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .04em; white-space: nowrap; }
+.hero__count [data-hero-current] { font-size: 1.75rem; line-height: 1; }
+.hero__dots { display: flex; gap: 6px; }
+.hero__dot { width: 40px; height: 26px; padding: 0; border: 0; background: none; display: grid; align-items: center; }
+.hero__dot span { display: block; height: 3px; background: rgba(255, 255, 255, .38); position: relative; overflow: hidden; }
+.hero__dot span::after {
+  content: ""; position: absolute; inset: 0; background: #fff;
+  transform-origin: 0 50%; transform: scaleX(var(--fill, 0));
+}
+.hero__btns { display: flex; gap: 6px; }
+.hero__btn {
+  width: 48px; height: 48px; display: grid; place-items: center;
+  border: 1.5px solid rgba(255, 255, 255, .7); border-radius: var(--radius); background: rgba(0, 0, 0, .15); color: #fff;
+  transition: background .3s, color .3s, border-color .3s;
+}
+.hero__btn:hover { background: #fff; border-color: #fff; color: var(--text); }
+.hero__btn .icon--play { display: none; }
+.hero__btn[aria-pressed="true"] .icon--play { display: block; }
+.hero__btn[aria-pressed="true"] .icon--pause { display: none; }
+
+@media (max-width: 820px) {
+  .hero__inner { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .hero__controls { grid-template-columns: minmax(0, 1fr) auto; justify-items: start; align-items: center; gap: .5rem 1rem; }
+  .hero__dots { grid-column: 1 / -1; grid-row: 1; width: 100%; }
+  .hero__dot { flex: 1; width: auto; }
+  .hero__count { grid-column: 1; grid-row: 2; }
+  .hero__btns { grid-column: 2; grid-row: 2; justify-self: end; }
+}
+
+/* ==================================================================
+   6. INTRO · "Wir brennen für Klinker"
+   ================================================================== */
+.intro { position: relative; isolation: isolate; overflow: hidden; background: #DCDCDA; }
+.intro__bg {
+  position: absolute; left: 0; top: -8%; z-index: -1;
+  width: 100%; height: 116%; object-fit: cover; object-position: right center;
+  transform: translateY(calc(var(--par, 0) * -50px));
+}
+.intro__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; }
+.intro .title { font-size: clamp(2.1rem, 5.6vw, 4.75rem); line-height: .98; }
+.intro__text { margin-block: clamp(1.5rem, 3vw, 2.5rem); }
+
+/* "Glut": ein warmer Lichtschein wandert langsam durch den Schriftzug */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .glut {
+    background: linear-gradient(100deg, var(--rot) 0%, var(--rot) 42%, #FF9E64 50%, var(--rot) 58%, var(--rot) 100%) 100% 0 / 320% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: glut 7s ease-in-out infinite;
+  }
+}
+@keyframes glut { 0%, 45% { background-position: 100% 0; } 100% { background-position: 0% 0; } }
+
+.qlinks { display: grid; gap: 10px; }
+.qlinks a {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.35rem 1.5rem;
+  background: var(--anthrazit); color: #fff; border-radius: var(--radius);
+  font-size: .9375rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; line-height: 1.3;
+}
+.qlinks a::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--rot-kraft);
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform .55s var(--ease);
+}
+.qlinks a:hover::before, .qlinks a:focus-visible::before { transform: scaleX(1); }
+.qlinks .icon { transition: transform .55s var(--ease); }
+.qlinks a:hover .icon, .qlinks a:focus-visible .icon { transform: translateX(6px); }
+
+@media (max-width: 900px) {
+  .intro__grid { grid-template-columns: minmax(0, 1fr); }
+  .intro::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(220, 220, 218, .55); }
+}
+
+/* ==================================================================
+   7. PRODUKTE
+   ================================================================== */
+.products__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: clamp(2rem, 5vw, 4rem); }
+.products__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(.75rem, 1.6vw, 1.5rem); }
+.product__link { display: block; text-decoration: none; perspective: 900px; }
+.product__media {
+  position: relative; display: block; aspect-ratio: 1; overflow: hidden; background: var(--grau);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .7s var(--ease), box-shadow .7s var(--ease);
+}
+.product__link.is-tilting .product__media { transition-duration: .12s; box-shadow: 0 30px 50px -30px rgba(0, 0, 0, .55); }
+.product__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.product__link:hover .product__media img, .product__link:focus-visible .product__media img { transform: scale(1.07); }
+.product__glare {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .38), transparent 55%);
+}
+.product__link.is-tilting .product__glare { opacity: 1; }
+.product__name {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem;
+  font-size: 1.0625rem; font-weight: 700; letter-spacing: .01em; text-transform: uppercase; line-height: 1.2;
+}
+.product__name::after {
+  content: ""; flex: none; width: 34px; height: 2px; background: var(--rot);
+  transform: scaleX(.35); transform-origin: 100% 50%; transition: transform .5s var(--ease);
+}
+.product__link:hover .product__name::after, .product__link:focus-visible .product__name::after { transform: scaleX(1); }
+.products__more { margin-top: clamp(2rem, 4vw, 3rem); color: var(--text-leise); }
+.products__more a { color: var(--text); }
+
+@media (min-width: 900px) {
+  .product:nth-child(even) { margin-top: clamp(1.5rem, 4vw, 3.5rem); }
+}
+@media (max-width: 899.98px) {
+  .products__list {
+    display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+  }
+  .products__list::-webkit-scrollbar { display: none; }
+  .product { flex: 0 0 min(64%, 300px); scroll-snap-align: start; }
+}
+
+/* ==================================================================
+   8. REFERENZEN · aufklappende Bildtafeln
+   ================================================================== */
+.refs-section { background: var(--anthrazit) var(--verband); color: #fff; }
+.refs__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.5rem 2rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.refs { display: flex; gap: 10px; height: clamp(420px, 64vh, 660px); }
+.ref { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; background: #262626; transition: flex-grow .85s var(--ease); }
+.ref.is-active { flex-grow: 2.6; }
+.ref__link { position: absolute; inset: 0; display: block; color: #fff; text-decoration: none; }
+.ref__link:focus-visible { outline-offset: -5px; }
+.ref img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(.7) brightness(.7); transform: scale(1.07);
+  transition: filter .85s var(--ease), transform 1.3s var(--ease);
+}
+.ref.is-active img { filter: none; transform: none; }
+.ref__body {
+  position: absolute; inset: auto 0 0 0; display: grid; gap: .5rem;
+  padding: 4rem clamp(1rem, 2vw, 1.75rem) clamp(1rem, 2vw, 1.75rem);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .8));
+}
+.ref__title { font-size: clamp(1.1rem, 1.7vw, 1.65rem); font-weight: 800; line-height: 1.1; text-transform: uppercase; overflow-wrap: break-word; hyphens: auto; }
+.ref__more {
+  display: inline-flex; align-items: center; gap: .6rem; font-size: .875rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.ref.is-active .ref__more { opacity: 1; transform: none; transition-delay: .2s; }
+.refs__more { margin-top: clamp(1.75rem, 3vw, 2.5rem); color: #C9C9C9; }
+.refs__more a { color: #fff; }
+
+@media (max-width: 899.98px) {
+  .refs { flex-direction: column; height: auto; }
+  .ref, .ref.is-active { flex: none; aspect-ratio: 4 / 3; }
+  .ref img { filter: none; transform: none; }
+  .ref__more { opacity: 1; transform: none; }
+}
+
+/* ==================================================================
+   9. KLINKER DES MONATS
+   ================================================================== */
+.kdm { background: var(--hell); }
+.kdm__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; }
+.kdm__label { display: block; color: var(--rot-kraft); font-size: 1.125rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.kdm__name { display: block; margin-top: .4rem; font-size: clamp(2.75rem, 5.6vw, 5.25rem); font-weight: 800; line-height: .95; letter-spacing: -.03em; white-space: nowrap; }
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.tags li { padding: .3rem .8rem; border: 1.5px solid var(--anthrazit); border-radius: var(--radius); font-size: .8125rem; font-weight: 600; }
+.kdm__text { margin-block: 1.5rem 2rem; }
+.kdm__stage { aspect-ratio: 4 / 3; }
+.kdm__thumbs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 8px; }
+.kdm__thumb { position: relative; padding: 0; border: 0; overflow: hidden; aspect-ratio: 4 / 3; background: var(--grau); }
+.kdm__thumb img { width: 100%; height: 100%; object-fit: cover; opacity: .5; transition: opacity .35s, transform .7s var(--ease); }
+.kdm__thumb:hover img { opacity: .9; transform: scale(1.06); }
+.kdm__thumb[aria-pressed="true"] img { opacity: 1; }
+.kdm__thumb::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--rot);
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform .45s var(--ease);
+}
+.kdm__thumb[aria-pressed="true"]::after { transform: scaleX(1); }
+@media (max-width: 900px) { .kdm__grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ==================================================================
+   10. BERATUNG · Bild öffnet sich beim Scrollen auf volle Breite
+   ================================================================== */
+.beratung { position: relative; overflow: hidden; padding-block: clamp(6rem, 17vw, 15rem) clamp(3rem, 8vw, 7rem); background: var(--hell); }
+.js .beratung { --p: 0; }
+.beratung__media {
+  position: absolute; inset: 0; background: #8E8E8A;
+  clip-path: inset(calc((1 - var(--p, 1)) * 10vh) calc((1 - var(--p, 1)) * 9vw));
+}
+.beratung__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.22 - var(--p, 1) * .22)); }
+.beratung__card { position: relative; max-width: 40rem; padding: clamp(1.5rem, 4vw, 3.5rem); background: #fff; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .55); }
+.beratung__kicker { color: var(--rot-kraft); font-size: 1.125rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.beratung__title { margin-block: .75rem 1.25rem; font-size: clamp(1.4rem, 2.5vw, 2.1rem); font-weight: 700; line-height: 1.22; text-transform: uppercase; hyphens: auto; }
+.beratung__card .btn { margin-top: 1.75rem; }
+
+/* ==================================================================
+   11. KUNDENSTIMMEN
+   ================================================================== */
+.stimmen__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.score { display: flex; align-items: baseline; gap: .9rem; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+.score__num { font-size: clamp(5rem, 12vw, 10rem); font-weight: 800; line-height: .82; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+.score__of { font-weight: 600; color: var(--text-leise); }
+.stars { display: block; width: 160px; height: 32px; margin-top: 1.25rem; }
+.score__meta { margin-top: .75rem; }
+.score__stand { font-size: .875rem; color: var(--text-leise); }
+.stimmen__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: 2rem; }
+.themes__intro { font-weight: 600; margin-bottom: 1rem; }
+.themes li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: .5rem 2rem; padding: 1.4rem 0; border-top: 1px solid var(--linie); }
+.themes li:last-child { border-bottom: 1px solid var(--linie); }
+.themes h3 { font-size: 1.0625rem; font-weight: 700; line-height: 1.3; text-transform: uppercase; }
+.themes p { color: var(--text-leise); }
+@media (max-width: 900px) { .stimmen__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .themes li { grid-template-columns: minmax(0, 1fr); } }
+
+/* ==================================================================
+   12. KONTAKT
+   ================================================================== */
+.kontakt { background: var(--anthrazit) var(--verband); color: #fff; }
+.kontakt__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.kontakt__phone {
+  display: inline-block; margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(2rem, 4.4vw, 3.5rem); font-weight: 800; line-height: 1; letter-spacing: -.02em; text-decoration: none;
+  background: linear-gradient(var(--rot), var(--rot)) 0 100% / 0 3px no-repeat; padding-bottom: .15em;
+  transition: background-size .5s var(--ease);
+}
+.kontakt__phone:hover, .kontakt__phone:focus-visible { background-size: 100% 3px; }
+.kontakt__mail { display: block; width: fit-content; margin-top: .75rem; font-size: 1.125rem; font-weight: 600; }
+.kontakt__block { margin-top: 2.25rem; }
+.kontakt__block h3 { margin-bottom: .5rem; font-size: .9375rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #C9C9C9; }
+.status { display: inline-flex; align-items: center; gap: .6rem; margin-bottom: .75rem; font-weight: 600; }
+.status::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: #9A9A9A; }
+.status.is-open { color: #6FCF8E; }
+.status.is-open::before { background: #6FCF8E; box-shadow: 0 0 0 0 rgba(111, 207, 142, .6); animation: puls 2.4s ease-out infinite; }
+@keyframes puls { to { box-shadow: 0 0 0 12px rgba(111, 207, 142, 0); } }
+.hours { border-collapse: collapse; }
+.hours th, .hours td { padding: .3rem 0; text-align: left; vertical-align: top; font-weight: 400; }
+.hours th { padding-right: 1.5rem; white-space: nowrap; font-weight: 600; }
+.hours tr.is-today th, .hours tr.is-today td { color: #fff; font-weight: 700; }
+.hours tr:not(.is-today) th, .hours tr:not(.is-today) td { color: #DADADA; }
+.hours__note { margin-top: .5rem; font-size: .875rem; color: #C9C9C9; }
+
+.form { padding: clamp(1.5rem, 4vw, 3rem); background: #fff; color: var(--text); }
+.form__intro { font-size: 1.1875rem; font-weight: 600; line-height: 1.45; margin-bottom: 1.75rem; }
+.form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.25rem; }
+.field { margin-bottom: 1.25rem; }
+.field label { display: block; margin-bottom: .35rem; font-size: .875rem; font-weight: 600; }
+.field input, .field textarea {
+  width: 100%; padding: .85rem 1rem; background: var(--hell);
+  border: 1.5px solid transparent; border-bottom-color: var(--anthrazit); border-radius: var(--radius) var(--radius) 0 0;
+  transition: border-color .25s, background .25s;
+}
+.field textarea { min-height: 9rem; resize: vertical; line-height: 1.6; }
+.field input:focus, .field textarea:focus { outline: none; background: #fff; border-color: var(--anthrazit); }
+.field [aria-invalid="true"] { border-color: var(--rot-kraft); background: #FFF4F2; }
+.field__error { margin-top: .35rem; font-size: .875rem; font-weight: 600; color: var(--rot-kraft); }
+.field__error:empty { display: none; }
+.form__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+.form__legal { flex: 1 1 14rem; font-size: .8125rem; line-height: 1.5; color: var(--text-leise); }
+.form__status { margin-top: 1.25rem; padding: 1rem 1.25rem; border-left: 4px solid var(--gruen); background: var(--hell); font-weight: 600; }
+.form__status.is-error { border-left-color: var(--rot-kraft); }
+.form__status:empty { display: none; }
+
+.showroom { position: relative; margin-top: clamp(3rem, 7vw, 6rem); background: #262626; overflow: hidden; }
+.showroom img { width: 100%; aspect-ratio: 1920 / 933; object-fit: cover; }
+.showroom figcaption {
+  position: absolute; inset: auto 0 0 0; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem;
+  padding: 4rem clamp(1rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2.5rem); background: linear-gradient(transparent, rgba(0, 0, 0, .8));
+}
+.showroom__title { font-size: clamp(1.25rem, 2.6vw, 2.1rem); font-weight: 800; line-height: 1.1; text-transform: uppercase; }
+@media (max-width: 900px) { .kontakt__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) {
+  .form__row { grid-template-columns: minmax(0, 1fr); }
+  .showroom img { aspect-ratio: 4 / 3; }
+}
+
+/* ==================================================================
+   13. KARTE (lädt erst nach Klick) + FOOTER
+   ================================================================== */
+.map { position: relative; min-height: clamp(340px, 50vh, 520px); display: grid; place-items: center; background: var(--grau) var(--verband-dunkel); }
+.map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map__card { width: min(100% - 2 * var(--gutter), 30rem); margin-block: 3rem; padding: clamp(1.5rem, 4vw, 2.5rem); background: #fff; box-shadow: 0 30px 60px -36px rgba(0, 0, 0, .5); }
+.map__card h2 { font-size: 1.25rem; font-weight: 800; text-transform: uppercase; line-height: 1.2; }
+.map__card address { font-style: normal; margin-block: .5rem 1.25rem; }
+.map__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+.map__note { margin-top: 1rem; font-size: .8125rem; line-height: 1.5; color: var(--text-leise); }
+
+.footer { padding-block: clamp(3rem, 6vw, 5rem) calc(2rem + env(safe-area-inset-bottom, 0px)); background: #fff; }
+.footer__grid { display: grid; grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+.footer__logo img { height: 64px; width: auto; }
+.footer h2 { margin-bottom: .75rem; font-size: .9375rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.footer li + li { margin-top: .35rem; }
+.footer a { text-decoration: none; background: linear-gradient(var(--rot), var(--rot)) 0 100% / 0 2px no-repeat; transition: background-size .4s var(--ease); }
+.footer a:hover, .footer a:focus-visible { background-size: 100% 2px; }
+.footer__logo a { background: none; }
+.footer address { font-style: normal; }
+.footer__base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.5rem; border-top: 1px solid var(--linie); font-size: .875rem; color: var(--text-leise); }
+.footer__base a { color: var(--text); font-weight: 600; }
+@media (max-width: 900px) { .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .footer__logo { grid-column: 1 / -1; } }
+@media (max-width: 480px) { .footer__grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ==================================================================
+   14. REDUZIERTE BEWEGUNG
+   ================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+  .js [data-unveil] > * { clip-path: none; }
+  .js .beratung { --p: 1; }
+  .js .site-header, .js .mask > span, .js .hero__actions, .js .hero__controls { transform: none; opacity: 1; }
+  .hero__stage, .hero__inner, .intro__bg { transform: none; opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Stern-Symbol für die Bewertungsanzeige -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="stern" viewBox="0 0 24 24"><path d="M12 2.2l3 6.4 6.8.9-5 4.8 1.3 6.9L12 17.8 5.9 21.2l1.3-6.9-5-4.8 6.8-.9z"/></symbol>
+</svg>
+
+<!-- ================================================================
+     HEADER
+     ================================================================ -->
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="logo" href="https://klinkerhandel.de/" aria-label="Klinkerhandel Rhede – zur Startseite">
+      <img src="https://klinkerhandel.de/wp-content/uploads/2022/02/Klinkerhandel-Rhede-Logo-13222.png" width="515" height="150" alt="Klinkerhandel Harbecke – Ihr Klinker-Fachhandel">
+    </a>
+
+    <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a class="nav__link" href="https://klinkerhandel.de/verblender/">Verblender</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="sub-verblender" aria-label="Untermenü Verblender"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="nav__sub" id="sub-verblender">
+            <li><a href="https://klinkerhandel.de/verblender/handform-verblender/">Handform</a></li>
+            <li><a href="https://klinkerhandel.de/verblender/strangpress/">Strangpress</a></li>
+            <li><a href="https://klinkerhandel.de/verblender/verblender-wasserstrich/">Wasserstrich</a></li>
+            <li><a href="https://klinkerhandel.de/recycling-klinker/">Recycling Klinker</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="https://klinkerhandel.de/riemchen/">Riemchen</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="sub-riemchen" aria-label="Untermenü Riemchen"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="nav__sub" id="sub-riemchen">
+            <li><a href="https://klinkerhandel.de/riemchen/riemchen_handform/">Handform</a></li>
+            <li><a href="https://klinkerhandel.de/riemchen/strangpress/">Strangpress</a></li>
+            <li><a href="https://klinkerhandel.de/riemchen/wasserstrich/">Wasserstrich</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="https://klinkerhandel.de/daemmklinker/">Dämmklinker</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="https://klinkerhandel.de/produkte/">Weitere Produkte</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="sub-produkte" aria-label="Untermenü Weitere Produkte"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="nav__sub" id="sub-produkte">
+            <li><a href="https://klinkerhandel.de/produkte/nistklinker/">Nistklinker</a></li>
+            <li><a href="https://klinkerhandel.de/kaminoefen/">Kaminöfen</a></li>
+            <li><a href="https://klinkerhandel.de/recycling-klinker/">Recycling Klinker</a></li>
+            <li><a href="https://klinkerhandel.de/faserbeton/">Faserbeton</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="https://klinkerhandel.de/referenzen/">Projekte</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="sub-projekte" aria-label="Untermenü Projekte"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="nav__sub" id="sub-projekte">
+            <li><a href="https://klinkerhandel.de/referenzen/referenzen-einfamilienhaeuser-und-doppelhaeuser/">Einfamilienhäuser und Doppelhäuser</a></li>
+            <li><a href="https://klinkerhandel.de/referenzen/referenzen-landhaus/">Landhaus</a></li>
+            <li><a href="https://klinkerhandel.de/referenzen/referenzen-modern-2/">Modern</a></li>
+            <li><a href="https://klinkerhandel.de/referenzen/referenzen-geschaeftshaus/">Geschäftshäuser</a></li>
+            <li><a href="https://klinkerhandel.de/referenzen/referenzen-mfh/">Mehrfamilienhäuser</a></li>
+            <li><a href="https://klinkerhandel.de/referenzen/referenzen-langformat/">Langformate</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="https://klinkerhandel.de/ueber-uns/">Über uns</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="sub-ueber" aria-label="Untermenü Über uns"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="nav__sub" id="sub-ueber">
+            <li><a href="https://klinkerhandel.de/unsere-ausstellung/">Unsere Ausstellung</a></li>
+            <li><a href="https://klinkerhandel.de/wie-bestelle-ich-richtig/">Wie bestelle ich richtig</a></li>
+            <li><a href="https://klinkerhandel.de/wissenswertes-2/">Wissenswertes</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- nur in der mobilen Navigation sichtbar -->
+      <div class="nav__extra">
+        <a href="https://www.instagram.com/klinkerhandel.harbecke.rhede/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/4928723033" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://klinkerhandel.de/wishlist/">Favoriten</a>
+        <a href="tel:028723033">02872 / 3033</a>
+      </div>
+    </nav>
+
+    <div class="tools">
+      <a class="tools__btn tools__btn--desktop" href="https://www.instagram.com/klinkerhandel.harbecke.rhede/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.7" cy="7.3" r=".7" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="tools__btn tools__btn--desktop" href="https://wa.me/4928723033" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4.3A8 8 0 1 1 8.4 19L4 20z"/><path d="M9.4 8.7c-.4 2.5 3.3 6.2 5.9 5.9l.7-1.5-1.8-1-.8.7c-.9-.4-1.8-1.3-2.2-2.2l.7-.8-1-1.8-1.5.7z" stroke-width="1.5"/></svg>
+      </a>
+      <button class="tools__btn" type="button" data-search-toggle aria-expanded="false" aria-controls="suche" aria-label="Suche öffnen">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      </button>
+      <a class="tools__btn tools__btn--desktop" href="https://klinkerhandel.de/wishlist/" aria-label="Favoriten">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.1 4.1 0 0 1 12 7.8 4.1 4.1 0 0 1 19.5 10C19.5 15.4 12 20 12 20z"/></svg>
+      </a>
+      <button class="tools__btn burger" type="button" aria-expanded="false" aria-controls="hauptnavigation" aria-label="Menü öffnen"><span></span><span></span></button>
+    </div>
+
+    <!-- Suche: nutzt die bestehende WordPress-Suche -->
+    <form class="search" id="suche" role="search" action="https://klinkerhandel.de/" method="get" hidden>
+      <label class="visually-hidden" for="suche-feld">Suche nach</label>
+      <input id="suche-feld" type="search" name="s" placeholder="Klinker, Riemchen, HBR-Nummer" autocomplete="off" required>
+      <button class="btn btn--dunkel" type="submit">Suchen</button>
+    </form>
+
+    <span class="site-header__progress" aria-hidden="true"></span>
+  </div>
+</header>
+
+<main id="inhalt">
+
+  <!-- ==============================================================
+       HERO · Bildwechsel im Läuferverband
+       ============================================================== -->
+  <section class="hero" aria-roledescription="Karussell" aria-label="Klinkerfassaden aus unseren Projekten">
+    <div class="brickstage hero__stage" data-brickstage>
+      <img class="brickstage__img" src="https://klinkerhandel.de/wp-content/uploads/2025/12/Slider-1.jpg" width="1024" height="600" alt="Einfamilienhaus mit rotbunter Klinkerfassade, dunklem Satteldach und weißen Sprossenfenstern" fetchpriority="high" decoding="async">
+      <div class="brickstage__wall" aria-hidden="true"></div>
+    </div>
+    <div class="hero__shade" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <h1 class="hero__title"><span class="mask"><span>Die Welt</span></span> <span class="mask"><span>der Klinker</span></span></h1>
+        <div class="hero__actions">
+          <a class="btn" href="mailto:info@klinkerhandel.de">Beratungstermin vereinbaren</a>
+          <a class="btn btn--linie" href="#produkte">Produkte entdecken</a>
+        </div>
+
+      <div class="hero__controls">
+        <p class="hero__count"><span class="visually-hidden">Bild </span><span data-hero-current>01</span><span aria-hidden="true"> / </span><span class="visually-hidden"> von </span>06</p>
+        <div class="hero__dots" role="group" aria-label="Bild auswählen">
+          <button class="hero__dot" type="button" aria-label="Bild 1 von 6" aria-current="true"><span></span></button>
+          <button class="hero__dot" type="button" aria-label="Bild 2 von 6"><span></span></button>
+          <button class="hero__dot" type="button" aria-label="Bild 3 von 6"><span></span></button>
+          <button class="hero__dot" type="button" aria-label="Bild 4 von 6"><span></span></button>
+          <button class="hero__dot" type="button" aria-label="Bild 5 von 6"><span></span></button>
+          <button class="hero__dot" type="button" aria-label="Bild 6 von 6"><span></span></button>
+        </div>
+        <div class="hero__btns">
+          <button class="hero__btn" type="button" data-hero-prev aria-label="Vorheriges Bild"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg></button>
+          <button class="hero__btn" type="button" data-hero-toggle aria-pressed="false" aria-label="Bildwechsel anhalten">
+            <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+            <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg>
+          </button>
+          <button class="hero__btn" type="button" data-hero-next aria-label="Nächstes Bild"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       INTRO
+       ============================================================== -->
+  <section class="intro section" data-parallax>
+    <img class="intro__bg" src="https://klinkerhandel.de/wp-content/uploads/2025/11/Kopie-von-Klinkerhandel-Website-Idea.jpg" width="1878" height="869" alt="" loading="lazy" decoding="async">
+    <div class="container intro__grid">
+      <div>
+        <h2 class="title glut" data-reveal>Wir brennen für Klinker</h2>
+        <p class="intro__text lead" data-reveal style="--delay:.1s">Als Spezialist für Klinkersteine &amp; Verblendsteine betreiben wir einen Fachhandel, Klinkerhandel Rhede, in Kooperation mit dem Baustoffzentrum Harbecke. Flexibel und innovativ mit einem feinen Gespür für die Trends der Zeit und des modernen Bauens sind wir als Klinkerhandel Rhede immer für unsere Kunden im Einsatz. Aus Überzeugung. Mit Begeisterung. Aus Leidenschaft für Klinker.</p>
+        <p data-reveal style="--delay:.2s"><a class="btn" href="mailto:info@klinkerhandel.de">Beratungstermin vereinbaren</a></p>
+      </div>
+      <ul class="qlinks">
+        <li data-reveal><a href="https://klinkerhandel.de/ueber-uns/"><span>Unsere Qualitätsmerkmale</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+        <li data-reveal style="--delay:.08s"><a href="https://klinkerhandel.de/unsere-ausstellung/"><span>Große Auswahl &amp; Vielfalt</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+        <li data-reveal style="--delay:.16s"><a href="https://klinkerhandel.de/wissenswertes-2/"><span>Das solltest du wissen</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+        <li data-reveal style="--delay:.24s"><a href="https://klinkerhandel.de/wie-bestelle-ich-richtig/"><span>Verlässliche Lieferungen</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       PRODUKTE
+       ============================================================== -->
+  <section class="section" id="produkte" aria-labelledby="produkte-titel">
+    <div class="container">
+      <div class="products__head">
+        <h2 class="title" id="produkte-titel" data-reveal>Unsere Produkte</h2>
+      </div>
+      <ul class="products__list">
+        <li class="product" data-reveal>
+          <a class="product__link" href="https://klinkerhandel.de/verblender/" data-tilt>
+            <span class="product__media"><img src="https://klinkerhandel.de/wp-content/uploads/2026/04/1.png" width="500" height="500" alt="Mustertafeln mit Verblendern in verschiedenen Farben" loading="lazy" decoding="async"><span class="product__glare"></span></span>
+            <span class="product__name">Verblender</span>
+          </a>
+        </li>
+        <li class="product" data-reveal style="--delay:.07s">
+          <a class="product__link" href="https://klinkerhandel.de/riemchen/" data-tilt>
+            <span class="product__media"><img src="https://klinkerhandel.de/wp-content/uploads/2026/04/2.png" width="500" height="500" alt="Fläche aus hellen, sandfarbenen Klinkerriemchen" loading="lazy" decoding="async"><span class="product__glare"></span></span>
+            <span class="product__name">Riemchen</span>
+          </a>
+        </li>
+        <li class="product" data-reveal style="--delay:.14s">
+          <a class="product__link" href="https://klinkerhandel.de/daemmklinker/" data-tilt>
+            <span class="product__media"><img src="https://klinkerhandel.de/wp-content/uploads/2026/04/3.png" width="500" height="500" alt="Dämmklinker: Dämmplatte mit aufgesetzten roten Klinkerriemchen" loading="lazy" decoding="async"><span class="product__glare"></span></span>
+            <span class="product__name">Dämmklinker</span>
+          </a>
+        </li>
+        <li class="product" data-reveal style="--delay:.21s">
+          <a class="product__link" href="https://klinkerhandel.de/produkte/nistklinker/" data-tilt>
+            <span class="product__media"><img src="https://klinkerhandel.de/wp-content/uploads/2026/04/4.png" width="500" height="500" alt="Nistklinker mit Einflugöffnung in rotem Mauerwerk" loading="lazy" decoding="async"><span class="product__glare"></span></span>
+            <span class="product__name">Nistklinker</span>
+          </a>
+        </li>
+        <li class="product" data-reveal style="--delay:.28s">
+          <a class="product__link" href="https://klinkerhandel.de/kaminoefen/" data-tilt>
+            <span class="product__media"><img src="https://klinkerhandel.de/wp-content/uploads/2026/04/5.png" width="500" height="500" alt="Kaminofen in einem modernen Wohnzimmer" loading="lazy" decoding="async"><span class="product__glare"></span></span>
+            <span class="product__name">Kaminöfen</span>
+          </a>
+        </li>
+      </ul>
+      <p class="products__more" data-reveal>Außerdem im Sortiment: <a class="textlink" href="https://klinkerhandel.de/recycling-klinker/">Recycling Klinker</a> und <a class="textlink" href="https://klinkerhandel.de/faserbeton/">Faserbeton</a>.</p>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       REFERENZEN
+       ============================================================== -->
+  <section class="refs-section section auf-dunkel" id="referenzen" aria-labelledby="referenzen-titel">
+    <div class="container">
+      <div class="refs__head">
+        <h2 class="title" id="referenzen-titel" data-reveal>Unsere Referenz-Galerie</h2>
+        <a class="btn btn--hell" href="https://klinkerhandel.de/referenzen/" data-reveal>Alle Referenzen <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div data-unveil>
+      <ul class="refs" data-refs>
+        <li class="ref is-active">
+          <a class="ref__link" href="https://klinkerhandel.de/referenzen/referenzen-einfamilienhaeuser-und-doppelhaeuser/">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2025/09/HBR-13-121-H1-1.jpg" width="800" height="600" alt="Wohnhäuser mit roter Klinkerfassade und dunklen Fensterrahmen" loading="lazy" decoding="async">
+            <span class="ref__body"><span class="ref__title">Einfamilien- &amp; Doppelhäuser</span><span class="ref__more">Projekte ansehen <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></span>
+          </a>
+        </li>
+        <li class="ref">
+          <a class="ref__link" href="https://klinkerhandel.de/referenzen/referenzen-landhaus/">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2023/04/HBR-13-118-EFH3-2.jpg" width="800" height="600" alt="Landhaus mit rotem Klinker, rotem Ziegeldach und dunkelgrünem Giebel" loading="lazy" decoding="async">
+            <span class="ref__body"><span class="ref__title">Landhaus</span><span class="ref__more">Projekte ansehen <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></span>
+          </a>
+        </li>
+        <li class="ref">
+          <a class="ref__link" href="https://klinkerhandel.de/referenzen/referenzen-modern-2/">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2021/09/Klinkerhandel-Rhede-Hausbeispiel.jpg" width="526" height="400" alt="Modernes Flachdachhaus mit Klinkerfassade im Erdgeschoss und Holzverkleidung im Obergeschoss" loading="lazy" decoding="async">
+            <span class="ref__body"><span class="ref__title">Moderner Stil</span><span class="ref__more">Projekte ansehen <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></span>
+          </a>
+        </li>
+      </ul>
+      </div>
+      <p class="refs__more" data-reveal>Weitere Projektwelten: <a class="textlink" href="https://klinkerhandel.de/referenzen/referenzen-geschaeftshaus/">Geschäftshäuser</a>, <a class="textlink" href="https://klinkerhandel.de/referenzen/referenzen-mfh/">Mehrfamilienhäuser</a> und <a class="textlink" href="https://klinkerhandel.de/referenzen/referenzen-langformat/">Langformate</a>.</p>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       KLINKER DES MONATS
+       ============================================================== -->
+  <section class="kdm section" id="klinker-des-monats" aria-labelledby="kdm-titel" data-kdm>
+    <div class="container kdm__grid">
+      <div>
+        <h2 id="kdm-titel" data-reveal><span class="kdm__label">Klinker des Monats</span> <span class="kdm__name">HBR 11-105</span></h2>
+        <ul class="tags" aria-label="Produktart" data-reveal style="--delay:.08s">
+          <li>Verblender</li>
+          <li>Handform</li>
+        </ul>
+        <p class="kdm__text lead" data-reveal style="--delay:.14s">Sie suchen nach dem idealen Klinker für Ihre Fassade? Wollen etwas ganz Spezielles und Einzigartiges? Wir beraten Sie gerne ausführlich. Schließlich ist jeder Klinker so individuell wie Ihr Gebäude.</p>
+        <p data-reveal style="--delay:.2s"><a class="btn" href="https://klinkerhandel.de/produkt/einfamilienhaus-h1-klinker-verblender-hbr-11-105-handform-klinkerstein/">Mehr erfahren <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+
+      <div data-reveal>
+        <div class="brickstage kdm__stage" data-brickstage>
+          <img class="brickstage__img" src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H1.jpg" width="800" height="600" alt="Wohnhaus mit hellem Klinker HBR 11-105 und anthrazitfarbenen Fenstern" loading="lazy" decoding="async">
+          <div class="brickstage__wall" aria-hidden="true"></div>
+        </div>
+        <div class="kdm__thumbs" role="group" aria-label="Ansichten des Klinkers HBR 11-105">
+          <button class="kdm__thumb" type="button" aria-pressed="true" aria-label="Ansicht 1: Wohnhaus von der Straße"
+                  data-src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H1.jpg"
+                  data-alt="Wohnhaus mit hellem Klinker HBR 11-105 und anthrazitfarbenen Fenstern">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H1.jpg" width="800" height="600" alt="" loading="lazy" decoding="async">
+          </button>
+          <button class="kdm__thumb" type="button" aria-pressed="false" aria-label="Ansicht 2: Fassadendetail mit Gräsern"
+                  data-src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H7.jpg"
+                  data-alt="Detail der hellen Klinkerfassade HBR 11-105 hinter einem Beet mit Gräsern">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H7.jpg" width="800" height="600" alt="" loading="lazy" decoding="async">
+          </button>
+          <button class="kdm__thumb" type="button" aria-pressed="false" aria-label="Ansicht 3: Fensterdetail"
+                  data-src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H5.jpg"
+                  data-alt="Dunkles Fenster in der hellen Klinkerfassade HBR 11-105">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H5.jpg" width="800" height="600" alt="" loading="lazy" decoding="async">
+          </button>
+          <button class="kdm__thumb" type="button" aria-pressed="false" aria-label="Ansicht 4: Haus mit Einfahrt"
+                  data-src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H6.jpg"
+                  data-alt="Zweigeschossiges Haus mit Klinker HBR 11-105, dunklem Dach und Einfahrt">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H6.jpg" width="800" height="600" alt="" loading="lazy" decoding="async">
+          </button>
+          <button class="kdm__thumb" type="button" aria-pressed="false" aria-label="Ansicht 5: Hauseingang"
+                  data-src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H3.jpg"
+                  data-alt="Hauseingang und Fassade mit Klinker HBR 11-105">
+            <img src="https://klinkerhandel.de/wp-content/uploads/2026/08/HBR-11-105-H3.jpg" width="800" height="600" alt="" loading="lazy" decoding="async">
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       ORIENTIERUNG UND BERATUNG
+       ============================================================== -->
+  <section class="beratung" id="beratung" aria-labelledby="beratung-titel" data-expand>
+    <div class="beratung__media">
+      <picture>
+        <source media="(max-width: 700px)" srcset="https://klinkerhandel.de/wp-content/uploads/2024/01/HBR9008-035-20.jpg">
+        <img src="https://klinkerhandel.de/wp-content/uploads/2025/12/Unten-scaled.jpg" width="2560" height="1707" alt="Modernes Wohnhaus mit grauer Klinkerfassade und Holzelementen zwischen hohen Bäumen" loading="lazy" decoding="async">
+      </picture>
+    </div>
+    <div class="container">
+      <div class="beratung__card" data-reveal>
+        <p class="beratung__kicker">Orientierung und Beratung</p>
+        <h2 class="beratung__title" id="beratung-titel">Gemeinsam finden wir den optisch und preislich passenden Klinker für Sie – immer.</h2>
+        <p>In unserer Ausstellung Klinkerhandel Rhede haben Sie die Gelegenheit Klinker in gemauerter Fläche, Farben, Sortierungen und Materialien zu besichtigen. So finden wir gemeinsam den passenden Klinker für Ihr Bauvorhaben – ganz nach Ihren Vorstellungen und architektonischen Anforderungen. Bei Klinkerhandel Rhede finden Sie Klinker, Riemchen und Verblender – wir haben die perfekte Auswahl für Sie!</p>
+        <a class="btn" href="mailto:info@klinkerhandel.de">Beratungstermin vereinbaren</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       KUNDENSTIMMEN
+       ============================================================== -->
+  <section class="section" id="kundenstimmen" aria-labelledby="stimmen-titel">
+    <div class="container stimmen__grid">
+      <div>
+        <h2 class="title" id="stimmen-titel" data-reveal>Das sagen unsere Kunden</h2>
+        <p class="score" data-reveal>
+          <span class="score__num" data-count="4.9" data-decimals="1">4,9</span>
+          <span class="score__of">von 5 Sternen</span>
+        </p>
+        <svg class="stars" viewBox="0 0 120 24" role="img" aria-label="4,9 von 5 Sternen">
+          <defs>
+            <linearGradient id="sterne-fuellung" gradientUnits="userSpaceOnUse" x1="0" x2="120" y1="0" y2="0">
+              <stop offset="98%" stop-color="#F5B301"/><stop offset="98%" stop-color="#D4D4D4"/>
+            </linearGradient>
+          </defs>
+          <g fill="url(#sterne-fuellung)">
+            <use href="#stern" x="0" width="24" height="24"/><use href="#stern" x="24" width="24" height="24"/><use href="#stern" x="48" width="24" height="24"/><use href="#stern" x="72" width="24" height="24"/><use href="#stern" x="96" width="24" height="24"/>
+          </g>
+        </svg>
+        <p class="score__meta">Basierend auf <strong><span data-count="56">56</span> Bewertungen</strong> bei Google</p>
+        <p class="score__stand">Stand: Oktober 2026</p>
+        <div class="stimmen__actions" data-reveal>
+          <a class="btn btn--dunkel" href="https://maps.google.com/?cid=4538305440914039918" target="_blank" rel="noopener">Alle Bewertungen lesen</a>
+          <a class="textlink" href="https://search.google.com/local/writereview?placeid=ChIJT-XimKdiuEcRbmTn58BM-z4" target="_blank" rel="noopener">Bewerte uns auf Google</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="themes__intro" data-reveal>Das heben Kunden in ihren Google-Bewertungen besonders oft hervor:</p>
+        <ul class="themes">
+          <li data-reveal><h3>Beratung mit Zeit</h3><p>Ausführlich, kompetent und ohne Zeitdruck – so beschreiben die meisten Kunden ihr Gespräch.</p></li>
+          <li data-reveal><h3>Klinker am gebauten Haus</h3><p>Viele berichten von gemeinsamen Fahrten zu Referenzhäusern in der Umgebung, um den Wunschklinker an einer echten Fassade zu sehen.</p></li>
+          <li data-reveal><h3>Hilfe bei Ausbesserungen</h3><p>Auch für kleine Mengen und schwer erhältliche Steine für bestehende Fassaden wurden passende Lösungen und Muster besorgt.</p></li>
+          <li data-reveal><h3>Verlässliche Abwicklung</h3><p>Bestellung, Lieferung und Nachlieferung liefen laut vielen Bewertungen reibungslos und wie abgesprochen.</p></li>
+          <li data-reveal><h3>Preis und Leistung</h3><p>Mehrere Kunden nennen ausdrücklich das gute Preis-Leistungs-Verhältnis.</p></li>
+        </ul>
+        <!-- SLOT: Hier im Livebetrieb das bestehende Google-Bewertungs-Widget (Shortcode) einsetzen,
+             damit die einzelnen Bewertungstexte aktuell und im Original erscheinen. -->
+        <div data-slot="google-bewertungen"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       KONTAKT
+       ============================================================== -->
+  <section class="kontakt section auf-dunkel" id="kontakt" aria-labelledby="kontakt-titel">
+    <div class="container">
+      <div class="kontakt__grid">
+        <div>
+          <h2 class="title" id="kontakt-titel" data-reveal>Kontakt &amp; Beratung</h2>
+          <div data-reveal>
+            <a class="kontakt__phone" href="tel:028723033"><span class="visually-hidden">Telefon: </span>02872 / 3033</a>
+            <a class="kontakt__mail textlink" href="mailto:info@klinkerhandel.de"><span class="visually-hidden">E-Mail: </span>info@klinkerhandel.de</a>
+          </div>
+          <div class="kontakt__block" data-reveal>
+            <h3>Anschrift</h3>
+            <address style="font-style:normal">Klinkerhandel Harbecke Rhede<br>Krechtinger Str. 29<br>46414 Rhede</address>
+          </div>
+          <div class="kontakt__block" data-reveal>
+            <h3>Öffnungszeiten</h3>
+            <p class="status" data-status role="status"></p>
+            <table class="hours">
+              <tbody>
+                <tr data-days="1,2,3,4"><th scope="row">Mo – Do</th><td>8:30 Uhr – 12:30 Uhr<br>14:00 Uhr – 17:30 Uhr</td></tr>
+                <tr data-days="5"><th scope="row">Fr</th><td>8:30 Uhr – 12:30 Uhr<br>14:00 Uhr – 17:00 Uhr</td></tr>
+                <tr data-days="6"><th scope="row">Sa</th><td>9:00 Uhr – 12:00 Uhr</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Kontaktformular
+             data-endpoint leer  -> öffnet das E-Mail-Programm mit vorbereiteter Nachricht
+             data-endpoint="URL" -> sendet die Felder als JSON per POST an die URL
+             Frontend-Prototyp – Backend-Anbindung erforderlich. -->
+        <form class="form" id="kontaktformular" data-endpoint="" novalidate data-reveal>
+          <p class="form__intro">Sie haben Fragen zu unseren Produkten oder Leistungen? Füllen Sie gerne direkt das Kontaktformular aus:</p>
+          <div class="form__row">
+            <div class="field">
+              <label for="f-vorname">Vorname</label>
+              <input id="f-vorname" name="vorname" type="text" autocomplete="given-name">
+            </div>
+            <div class="field">
+              <label for="f-nachname">Nachname</label>
+              <input id="f-nachname" name="nachname" type="text" autocomplete="family-name">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-email">E-Mail (Pflichtfeld)</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-fehler" data-msg-missing="Bitte geben Sie Ihre E-Mail-Adresse ein." data-msg-invalid="Diese E-Mail-Adresse ist unvollständig. Beispiel: name@beispiel.de">
+            <p class="field__error" id="f-email-fehler"></p>
+          </div>
+          <div class="field">
+            <label for="f-nachricht">Nachricht (Pflichtfeld)</label>
+            <textarea id="f-nachricht" name="nachricht" required placeholder="Tragen Sie hier Ihre unverbindliche Anfrage ein" aria-describedby="f-nachricht-fehler" data-msg-missing="Bitte schreiben Sie uns kurz, worum es geht."></textarea>
+            <p class="field__error" id="f-nachricht-fehler"></p>
+          </div>
+          <div class="form__foot">
+            <button class="btn" type="submit" data-submit>Jetzt senden</button>
+            <p class="form__legal">Informationen zur Verarbeitung Ihrer Daten finden Sie in unseren <a class="textlink" href="https://klinkerhandel.de/datenschutzhinweise/">Datenschutzhinweisen</a>.</p>
+          </div>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div data-unveil>
+      <figure class="showroom">
+        <img src="https://klinkerhandel.de/wp-content/uploads/2021/12/Klinkerhandel-Rhede-Showroom-2.jpg" width="1920" height="933" alt="Ausstellung des Klinkerhandels Rhede mit Klinker-Mustertafeln" loading="lazy" decoding="async">
+        <figcaption>
+          <span class="showroom__title">Unsere Ausstellung in Rhede</span>
+          <a class="btn btn--hell" href="https://klinkerhandel.de/unsere-ausstellung/">Ausstellung ansehen <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+        </figcaption>
+      </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       KARTE · wird erst nach Klick von Google geladen
+       ============================================================== -->
+  <section class="map" aria-labelledby="karte-titel" data-map
+           data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2465.578310602505!2d6.697331315933983!3d51.832133294728415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b862a798e2e54f%3A0x3efb4cc0e7e7646e!2sKlinkerhandel%20Harbecke%20Rhede!5e0!3m2!1sde!2sde!4v1642113784218!5m2!1sde!2sde">
+    <div class="map__card">
+      <h2 id="karte-titel">So finden Sie uns</h2>
+      <address>Krechtinger Str. 29, 46414 Rhede</address>
+      <div class="map__actions">
+        <button class="btn btn--dunkel" type="button" data-map-load>Karte laden</button>
+        <a class="textlink" href="https://maps.google.com/?cid=4538305440914039918" target="_blank" rel="noopener">In Google Maps öffnen</a>
+      </div>
+      <p class="map__note">Beim Laden der Karte werden Daten an Google übertragen. Mehr dazu in den <a class="textlink" href="https://klinkerhandel.de/datenschutzhinweise/">Datenschutzhinweisen</a>.</p>
+    </div>
+  </section>
+</main>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__logo">
+        <a href="https://klinkerhandel.de/" aria-label="Klinkerhandel Rhede – zur Startseite">
+          <img src="https://klinkerhandel.de/wp-content/uploads/2022/02/Klinkerhandel-Rhede-Logo-13222.png" width="515" height="150" alt="Klinkerhandel Harbecke – Ihr Klinker-Fachhandel" loading="lazy">
+        </a>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <ul>
+          <li><a href="tel:028723033">02872 / 3033</a></li>
+          <li><a href="mailto:info@klinkerhandel.de">info@klinkerhandel.de</a></li>
+          <li><a href="https://wa.me/4928723033" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/klinkerhandel.harbecke.rhede/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Anschrift</h2>
+        <address>Krechtinger Str. 29<br>46414 Rhede</address>
+      </div>
+      <div>
+        <h2>Rechtliches</h2>
+        <ul>
+          <li><a href="https://klinkerhandel.de/impressum/">Impressum</a></li>
+          <li><a href="https://klinkerhandel.de/datenschutzhinweise/">Datenschutzhinweise</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <p>Design &amp; Umsetzung: <a href="https://hey-lemon.com/" target="_blank" rel="noopener">Hey Lemon</a></p>
+      <p><a href="#inhalt">Nach oben</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================================
+   KLINKERHANDEL · STARTSEITE · JAVASCRIPT
+   Jedes Modul ist gekapselt. Fällt eines aus, laufen die anderen weiter.
+   ==================================================================== */
+(() => {
+  'use strict';
+
+  const $  = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+  const root = document.documentElement;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
+  const modul = (name, fn) => { try { fn(); } catch (err) { console.error('[Modul ' + name + ']', err); } };
+
+  /* ------------------------------------------------------------------
+     DATEN · Hero-Bilder (getrennt von der Darstellung, leicht erweiterbar)
+     ------------------------------------------------------------------ */
+  const UPLOADS = 'https://klinkerhandel.de/wp-content/uploads/';
+  const HERO_BILDER = [
+    { src: UPLOADS + '2025/12/Slider-1.jpg',        alt: 'Einfamilienhaus mit rotbunter Klinkerfassade, dunklem Satteldach und weißen Sprossenfenstern' },
+    { src: UPLOADS + '2025/12/Slider-2-scaled.jpg', alt: 'Mehrgeschossiges Wohn- und Geschäftshaus mit roter Klinkerfassade' },
+    { src: UPLOADS + '2025/12/Slider-3.jpg',        alt: 'Modernes Flachdachhaus mit heller, grauer Klinkerfassade' },
+    { src: UPLOADS + '2025/12/Slider-4.jpg',        alt: 'Einfamilienhaus mit rotem Klinker und dunklem Satteldach' },
+    { src: UPLOADS + '2025/12/Slider-5.jpg',        alt: 'Stadtvilla mit hellem, sandfarbenem Klinker und anthrazitfarbenen Fenstern' },
+    { src: UPLOADS + '2025/12/Slider-6-scaled.jpg', alt: 'Mehrfamilienhaus mit rotem Klinker, Holzelementen und dunklem Dach' }
+  ];
+
+  /* ------------------------------------------------------------------
+     KOMPONENTE · BrickStage
+     Mauert das nächste Bild Lage für Lage im Läuferverband auf.
+     Erwartet im Wurzelelement: .brickstage__img und .brickstage__wall
+     ------------------------------------------------------------------ */
+  class BrickStage {
+    constructor(el, { spalten = (w) => (w < 640 ? 3 : w < 1100 ? 5 : 6), dauer = 1100, verhaeltnis = 3 } = {}) {
+      this.el = el;
+      this.img = $('.brickstage__img', el);
+      this.wall = $('.brickstage__wall', el);
+      this.spalten = spalten;          // Steine pro Lage, abhängig von der Bühnenbreite
+      this.dauer = dauer;              // Gesamtdauer des Aufmauerns in ms
+      this.verhaeltnis = verhaeltnis;  // Länge : Höhe eines Steins
+      this.busy = false;
+    }
+
+    laden(src) {
+      return new Promise((ok, fehler) => {
+        const bild = new Image();
+        bild.onload = () => ok(bild);
+        bild.onerror = fehler;
+        bild.src = src;
+      });
+    }
+
+    /* Zeigt ein neues Bild. Gibt true zurück, wenn der Wechsel geklappt hat. */
+    async show({ src, alt }) {
+      if (this.busy) return false;
+      this.busy = true;
+      try {
+        const bild = await this.laden(src);
+        if (!reduceMotion && typeof this.wall.animate === 'function') await this.mauern(bild, src);
+        this.img.src = src;
+        if (alt !== undefined) this.img.alt = alt;
+        try { await this.img.decode(); } catch (e) { /* Bild ist bereits geladen */ }
+        this.wall.replaceChildren();
+        return true;
+      } catch (e) {
+        this.wall.replaceChildren();
+        return false;
+      } finally {
+        this.busy = false;
+      }
+    }
+
+    mauern(bild, src) {
+      const W = this.el.clientWidth, H = this.el.clientHeight;
+      // Geometrie wie object-fit: cover, damit Steine und fertiges Bild deckungsgleich sind
+      const faktor = Math.max(W / bild.naturalWidth, H / bild.naturalHeight);
+      const bw = bild.naturalWidth * faktor, bh = bild.naturalHeight * faktor;
+      const ox = (W - bw) / 2, oy = (H - bh) / 2;
+
+      const spalten = this.spalten(W);
+      const sw = W / spalten;                 // Steinlänge
+      const sh = sw / this.verhaeltnis;       // Steinhöhe
+      const lagen = Math.ceil(H / sh);
+      const fragment = document.createDocumentFragment();
+      const steine = [];
+
+      for (let lage = 0; lage < lagen; lage++) {            // Lage 0 = unterste Reihe
+        const y1 = Math.round(H - lage * sh);
+        const y0 = Math.round(H - (lage + 1) * sh);
+        const versatz = lage % 2 ? -sw / 2 : 0;             // halber Stein Versatz = Läuferverband
+        const anzahl = lage % 2 ? spalten + 1 : spalten;
+        const reihe = [];
+        for (let i = 0; i < anzahl; i++) {
+          const x0 = Math.round(versatz + i * sw);
+          const x1 = Math.round(versatz + (i + 1) * sw);
+          const stein = document.createElement('i');
+          stein.className = 'brick';
+          stein.style.cssText =
+            'left:' + x0 + 'px;top:' + y0 + 'px;width:' + (x1 - x0) + 'px;height:' + (y1 - y0) + 'px;' +
+            'background-image:url("' + src + '");background-size:' + bw + 'px ' + bh + 'px;' +
+            'background-position:' + (ox - x0) + 'px ' + (oy - y0) + 'px;opacity:0';
+          reihe.push(stein);
+          fragment.appendChild(stein);
+        }
+        if (lage % 2) reihe.reverse();                      // Lagen abwechselnd von links und rechts setzen
+        steine.push(...reihe);
+      }
+      this.wall.replaceChildren(fragment);
+
+      const takt = this.dauer / steine.length;
+      const fuge = 'inset 0 0 0 1px rgba(255,255,255,.55)';
+      const animationen = steine.map((stein, i) => stein.animate(
+        [
+          { opacity: 0, transform: 'translate3d(0,-22px,0)', boxShadow: fuge },
+          { opacity: 1, transform: 'translate3d(0,0,0)', boxShadow: fuge, offset: .55 },
+          { opacity: 1, transform: 'translate3d(0,0,0)', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0)' }
+        ],
+        { duration: 520, delay: i * takt, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'both' }
+      ));
+      return animationen[animationen.length - 1].finished.catch(() => {});
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     MODUL · Seitenstart
+     ------------------------------------------------------------------ */
+  modul('start', () => {
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('is-ready')));
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Hero-Karussell
+     ------------------------------------------------------------------ */
+  modul('hero', () => {
+    const hero = $('.hero');
+    if (!hero) return;
+    const buehne = new BrickStage($('[data-brickstage]', hero), { dauer: 1150 });
+    const punkte = $$('.hero__dot', hero);
+    const zaehler = $('[data-hero-current]', hero);
+    const schalter = $('[data-hero-toggle]', hero);
+    const steuerung = $('.hero__controls', hero);
+    const INTERVALL = 6500;
+
+    let index = 0;
+    let vergangen = reduceMotion ? 0 : 3000;   // der erste Wechsel kommt etwas früher
+    let laeuft = !reduceMotion;
+    let sichtbar = true;
+    let angehalten = false;                    // kurzzeitig, solange die Steuerung bedient wird
+    let zuletzt = 0;
+
+    const zeichnen = () => {
+      punkte.forEach((punkt, i) => {
+        punkt.style.setProperty('--fill', i < index ? 1 : i === index ? clamp(vergangen / INTERVALL).toFixed(3) : 0);
+        if (i === index) punkt.setAttribute('aria-current', 'true'); else punkt.removeAttribute('aria-current');
+      });
+    };
+
+    const gehe = async (ziel) => {
+      const n = (ziel + HERO_BILDER.length) % HERO_BILDER.length;
+      if (n === index || buehne.busy) return;
+      await buehne.show(HERO_BILDER[n]);
+      index = n;
+      vergangen = 0;
+      zaehler.textContent = String(index + 1).padStart(2, '0');
+      zeichnen();
+    };
+
+    const schalterSetzen = () => {
+      schalter.setAttribute('aria-pressed', String(!laeuft));
+      schalter.setAttribute('aria-label', laeuft ? 'Bildwechsel anhalten' : 'Bildwechsel fortsetzen');
+    };
+
+    const takt = (t) => {
+      const dt = zuletzt ? Math.min(100, t - zuletzt) : 0;
+      zuletzt = t;
+      if (laeuft && sichtbar && !angehalten && !buehne.busy) {
+        vergangen += dt;
+        if (vergangen >= INTERVALL) gehe(index + 1); else zeichnen();
+      }
+      requestAnimationFrame(takt);
+    };
+
+    $('[data-hero-prev]', hero).addEventListener('click', () => gehe(index - 1));
+    $('[data-hero-next]', hero).addEventListener('click', () => gehe(index + 1));
+    punkte.forEach((punkt, i) => punkt.addEventListener('click', () => gehe(i)));
+    schalter.addEventListener('click', () => { laeuft = !laeuft; schalterSetzen(); });
+    steuerung.addEventListener('pointerenter', () => { angehalten = true; });
+    steuerung.addEventListener('pointerleave', () => { angehalten = false; });
+    steuerung.addEventListener('focusin', () => { angehalten = true; });
+    steuerung.addEventListener('focusout', () => { angehalten = false; });
+
+    // Wischen auf Touch-Geräten
+    let startX = null;
+    hero.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 60) gehe(index + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([eintrag]) => { sichtbar = eintrag.isIntersecting; }, { threshold: .25 }).observe(hero);
+    }
+    schalterSetzen();
+    zeichnen();
+    requestAnimationFrame(takt);
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Klinker des Monats (Bildwahl über Vorschaubilder)
+     ------------------------------------------------------------------ */
+  modul('klinker-des-monats', () => {
+    const bereich = $('[data-kdm]');
+    if (!bereich) return;
+    const buehne = new BrickStage($('[data-brickstage]', bereich), { spalten: (w) => (w < 520 ? 3 : 4), dauer: 800 });
+    const vorschau = $$('.kdm__thumb', bereich);
+    vorschau.forEach((knopf) => knopf.addEventListener('click', async () => {
+      if (knopf.getAttribute('aria-pressed') === 'true' || buehne.busy) return;
+      const ok = await buehne.show({ src: knopf.dataset.src, alt: knopf.dataset.alt });
+      if (ok) vorschau.forEach((k) => k.setAttribute('aria-pressed', String(k === knopf)));
+    }));
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Navigation, Suche
+     ------------------------------------------------------------------ */
+  modul('navigation', () => {
+    const nav = $('#hauptnavigation');
+    const burger = $('.burger');
+    const suche = $('#suche');
+    const sucheKnopf = $('[data-search-toggle]');
+    const aussen = [$('main'), $('.footer')];
+    const mobil = matchMedia('(max-width: 1179.98px)');
+
+    const untermenuesSchliessen = (ausser) => {
+      $$('.nav__item.is-open', nav).forEach((punkt) => {
+        if (punkt === ausser) return;
+        punkt.classList.remove('is-open');
+        $('.nav__toggle', punkt).setAttribute('aria-expanded', 'false');
+      });
+    };
+    const menue = (offen) => {
+      root.classList.toggle('nav-open', offen);
+      burger.setAttribute('aria-expanded', String(offen));
+      burger.setAttribute('aria-label', offen ? 'Menü schließen' : 'Menü öffnen');
+      aussen.forEach((el) => { if (el) el.inert = offen; });
+      if (!offen) untermenuesSchliessen();
+    };
+    const sucheSchalten = (offen) => {
+      suche.hidden = !offen;
+      sucheKnopf.setAttribute('aria-expanded', String(offen));
+      sucheKnopf.setAttribute('aria-label', offen ? 'Suche schließen' : 'Suche öffnen');
+      if (offen) $('input', suche).focus();
+    };
+
+    burger.addEventListener('click', () => { sucheSchalten(false); menue(!root.classList.contains('nav-open')); });
+    sucheKnopf.addEventListener('click', () => { menue(false); sucheSchalten(suche.hidden); });
+
+    nav.addEventListener('click', (e) => {
+      const knopf = e.target.closest('.nav__toggle');
+      if (knopf) {
+        const punkt = knopf.closest('.nav__item');
+        const offen = !punkt.classList.contains('is-open');
+        untermenuesSchliessen(punkt);
+        punkt.classList.toggle('is-open', offen);
+        knopf.setAttribute('aria-expanded', String(offen));
+        return;
+      }
+      if (e.target.closest('a') && root.classList.contains('nav-open')) menue(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (root.classList.contains('nav-open')) { menue(false); burger.focus(); }
+      if (!suche.hidden) { sucheSchalten(false); sucheKnopf.focus(); }
+      untermenuesSchliessen();
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav__item')) untermenuesSchliessen();
+      if (!suche.hidden && !e.target.closest('#suche, [data-search-toggle]')) sucheSchalten(false);
+    });
+    mobil.addEventListener('change', () => menue(false));
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Scroll-Effekte (ein gemeinsamer, gedrosselter Handler)
+     ------------------------------------------------------------------ */
+  modul('scroll', () => {
+    const header = $('.site-header');
+    const hero = $('.hero');
+    const aufziehen = $$('[data-expand]');
+    const parallax = $$('[data-parallax]');
+    let geplant = false;
+
+    const aktualisieren = () => {
+      geplant = false;
+      const y = window.scrollY, vh = window.innerHeight;
+      const max = root.scrollHeight - vh;
+      root.style.setProperty('--scroll', max > 0 ? clamp(y / max).toFixed(4) : '0');
+      header.classList.toggle('is-stuck', y > 24);
+      if (reduceMotion) return;
+
+      if (hero && y <= hero.offsetHeight) hero.style.setProperty('--hp', clamp(y / hero.offsetHeight).toFixed(3));
+      aufziehen.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) el.style.setProperty('--p', clamp((vh - r.top) / (vh * .9)).toFixed(3));
+      });
+      parallax.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) el.style.setProperty('--par', clamp((r.top + r.height / 2 - vh / 2) / vh, -1, 1).toFixed(3));
+      });
+    };
+    const anfordern = () => { if (!geplant) { geplant = true; requestAnimationFrame(aktualisieren); } };
+    addEventListener('scroll', anfordern, { passive: true });
+    addEventListener('resize', anfordern);
+    aktualisieren();
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Einblenden beim Scrollen + Zähler
+     ------------------------------------------------------------------ */
+  modul('einblenden', () => {
+    const elemente = $$('[data-reveal], [data-unveil]');
+    const zaehler = $$('[data-count]');
+
+    const hochzaehlen = (el) => {
+      const ziel = parseFloat(el.dataset.count);
+      const stellen = Number(el.dataset.decimals || 0);
+      const format = (v) => v.toLocaleString('de-DE', { minimumFractionDigits: stellen, maximumFractionDigits: stellen });
+      if (reduceMotion) { el.textContent = format(ziel); return; }
+      const start = performance.now(), dauer = 1500;
+      const schritt = (t) => {
+        const k = clamp((t - start) / dauer);
+        el.textContent = format(ziel * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(schritt);
+      };
+      requestAnimationFrame(schritt);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      elemente.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+    const beobachter = new IntersectionObserver((eintraege) => {
+      eintraege.forEach((eintrag) => {
+        if (!eintrag.isIntersecting) return;
+        eintrag.target.classList.add('is-in');
+        beobachter.unobserve(eintrag.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: .12 });
+    elemente.forEach((el) => beobachter.observe(el));
+
+    const zaehlBeobachter = new IntersectionObserver((eintraege) => {
+      eintraege.forEach((eintrag) => {
+        if (!eintrag.isIntersecting) return;
+        hochzaehlen(eintrag.target);
+        zaehlBeobachter.unobserve(eintrag.target);
+      });
+    }, { threshold: .6 });
+    zaehler.forEach((el) => zaehlBeobachter.observe(el));
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Produktkacheln neigen sich zum Mauszeiger
+     ------------------------------------------------------------------ */
+  modul('neigen', () => {
+    if (reduceMotion || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    $$('[data-tilt]').forEach((karte) => {
+      karte.addEventListener('pointermove', (e) => {
+        const r = karte.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        karte.classList.add('is-tilting');
+        karte.style.setProperty('--ry', ((px - .5) * 12).toFixed(2) + 'deg');
+        karte.style.setProperty('--rx', ((.5 - py) * 10).toFixed(2) + 'deg');
+        karte.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        karte.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      });
+      karte.addEventListener('pointerleave', () => {
+        karte.classList.remove('is-tilting');
+        karte.style.setProperty('--rx', '0deg');
+        karte.style.setProperty('--ry', '0deg');
+      });
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Referenz-Tafeln (die berührte Tafel klappt auf)
+     ------------------------------------------------------------------ */
+  modul('referenzen', () => {
+    const liste = $('[data-refs]');
+    if (!liste) return;
+    const tafeln = $$('.ref', liste);
+    const aktivieren = (tafel) => tafeln.forEach((t) => t.classList.toggle('is-active', t === tafel));
+    tafeln.forEach((tafel) => {
+      tafel.addEventListener('pointerenter', () => aktivieren(tafel));
+      tafel.addEventListener('focusin', () => aktivieren(tafel));
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Öffnungszeiten: "Jetzt geöffnet" nach deutscher Zeit
+     ------------------------------------------------------------------ */
+  modul('oeffnungszeiten', () => {
+    const anzeige = $('[data-status]');
+    if (!anzeige) return;
+    // Minuten seit Mitternacht; 0 = Sonntag … 6 = Samstag
+    const ZEITEN = {
+      0: [],
+      1: [[510, 750], [840, 1050]], 2: [[510, 750], [840, 1050]], 3: [[510, 750], [840, 1050]], 4: [[510, 750], [840, 1050]],
+      5: [[510, 750], [840, 1020]],
+      6: [[540, 720]]
+    };
+    const TAGE = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+    const uhr = (min) => Math.floor(min / 60) + ':' + String(min % 60).padStart(2, '0') + ' Uhr';
+
+    const jetztInRhede = () => {
+      const teile = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+      const wert = (typ) => teile.find((t) => t.type === typ).value;
+      const tag = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(wert('weekday'));
+      return { tag, minute: (Number(wert('hour')) % 24) * 60 + Number(wert('minute')) };
+    };
+
+    const aktualisieren = () => {
+      const { tag, minute } = jetztInRhede();
+      const offen = ZEITEN[tag].find(([von, bis]) => minute >= von && minute < bis);
+      let text;
+      if (offen) {
+        text = 'Jetzt geöffnet, bis ' + uhr(offen[1]);
+      } else {
+        const heute = ZEITEN[tag].find(([von]) => von > minute);
+        if (heute) {
+          text = 'Gerade geschlossen, öffnet um ' + uhr(heute[0]);
+        } else {
+          for (let i = 1; i <= 7; i++) {
+            const naechster = (tag + i) % 7;
+            if (ZEITEN[naechster].length) {
+              text = 'Gerade geschlossen, öffnet ' + (i === 1 ? 'morgen' : 'am ' + TAGE[naechster]) + ' um ' + uhr(ZEITEN[naechster][0][0]);
+              break;
+            }
+          }
+        }
+      }
+      anzeige.textContent = text;
+      anzeige.classList.toggle('is-open', Boolean(offen));
+      $$('.hours tr').forEach((zeile) => zeile.classList.toggle('is-today', zeile.dataset.days.split(',').includes(String(tag))));
+    };
+    aktualisieren();
+    setInterval(aktualisieren, 60000);
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Kontaktformular
+     Ohne data-endpoint: öffnet das E-Mail-Programm (mailto).
+     Mit data-endpoint:  POST als JSON. -> Backend-Anbindung erforderlich.
+     ------------------------------------------------------------------ */
+  modul('kontaktformular', () => {
+    const formular = $('#kontaktformular');
+    if (!formular) return;
+    const meldung = $('.form__status', formular);
+    const knopf = $('[data-submit]', formular);
+    const endpunkt = (formular.dataset.endpoint || '').trim();
+    const pflichtfelder = $$('[required]', formular);
+    if (!endpunkt) knopf.textContent = 'Anfrage per E-Mail senden';
+
+    const pruefen = (feld) => {
+      const fehler = document.getElementById(feld.id + '-fehler');
+      let text = '';
+      if (feld.validity.valueMissing || !feld.value.trim()) text = feld.dataset.msgMissing;
+      else if (!feld.validity.valid) text = feld.dataset.msgInvalid || feld.dataset.msgMissing;
+      feld.setAttribute('aria-invalid', String(Boolean(text)));
+      if (fehler) fehler.textContent = text;
+      return !text;
+    };
+    pflichtfelder.forEach((feld) => {
+      feld.addEventListener('blur', () => pruefen(feld));
+      feld.addEventListener('input', () => { if (feld.getAttribute('aria-invalid') === 'true') pruefen(feld); });
+    });
+
+    const melden = (text, fehler = false) => {
+      meldung.textContent = text;
+      meldung.classList.toggle('is-error', fehler);
+    };
+
+    formular.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      melden('');
+      const ungueltig = pflichtfelder.filter((feld) => !pruefen(feld));
+      if (ungueltig.length) { ungueltig[0].focus(); return; }
+
+      const daten = Object.fromEntries(new FormData(formular));
+      if (endpunkt) {
+        knopf.disabled = true;
+        try {
+          const antwort = await fetch(endpunkt, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(daten) });
+          if (!antwort.ok) throw new Error('HTTP ' + antwort.status);
+          formular.reset();
+          melden('Vielen Dank für Ihre Anfrage. Wir melden uns zeitnah zurück.');
+        } catch (err) {
+          melden('Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder rufen Sie uns an: 02872 / 3033.', true);
+        } finally {
+          knopf.disabled = false;
+        }
+      } else {
+        const name = [daten.vorname, daten.nachname].filter(Boolean).join(' ');
+        const text = daten.nachricht + '\n\n' + (name ? name + '\n' : '') + daten.email;
+        window.location.href = 'mailto:info@klinkerhandel.de?subject=' + encodeURIComponent('Anfrage über klinkerhandel.de') + '&body=' + encodeURIComponent(text);
+        melden('Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Nachricht. Bitte senden Sie die E-Mail dort ab.');
+      }
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     MODUL · Karte erst nach Klick laden
+     ------------------------------------------------------------------ */
+  modul('karte', () => {
+    const karte = $('[data-map]');
+    if (!karte) return;
+    $('[data-map-load]', karte).addEventListener('click', () => {
+      const rahmen = document.createElement('iframe');
+      rahmen.src = karte.dataset.src;
+      rahmen.title = 'Google Maps: Klinkerhandel Harbecke Rhede, Krechtinger Str. 29, 46414 Rhede';
+      rahmen.loading = 'lazy';
+      rahmen.allowFullscreen = true;
+      rahmen.referrerPolicy = 'no-referrer-when-downgrade';
+      karte.replaceChildren(rahmen);
+      rahmen.focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>
